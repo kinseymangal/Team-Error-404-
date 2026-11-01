@@ -1,0 +1,9 @@
+# Independent glaucoma report and attention
+
+Image reports now has independent DR and Glaucoma tabs. Print/save PDF exports the selected disease for both eyes. The glaucoma report has binary scores, original photographs, glaucoma-specific Grad-CAM, glaucoma guidance and its independent review status. It does not reuse DR grades, DR heatmaps, DR lesion masks or DR doctor approval.
+
+Grad-CAM comes from the actual EfficientNet-B0 glaucoma model activation output (1280 channels, 7x7) and the exact gradients of its glaucoma-suspected logit through global average pooling and its linear head. Weights and biases are read from the same checksum-verified ONNX file. At inference, reconstructing both logits from activation pooling and those weights must agree with the model output within 0.002 or attention generation is refused. Positive attention is normalized and resized; padding added during inference is removed before mapping back to the original photograph. This is coarse class attention, not optic-nerve segmentation, lesion localization or clinical severity.
+
+The classifier still failed research validation. Adding an explanation map does not improve its predictive accuracy. No disc/cup segmentation model was supplied or trained. Its segmentation tab explicitly reports this rather than showing DR masks. Existing saved glaucoma predictions must be screened again to obtain the new attention map.
+
+Executed checks: all 40 tests passed, including actual binary inference, attention PNG and 7x7 metadata, distinct heatmaps for two benchmark photos and absent segmentation masks. Production build passed. Headless Chrome checked disease tab switching, glaucoma-model map identity, unavailable segmentation state, and a two-eye glaucoma PDF with four image views and four binary-score rows, no NPDR labels and no browser errors. Patient identity and clinical notes in the browser fixture were synthetic.

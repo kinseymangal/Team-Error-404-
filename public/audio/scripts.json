@@ -1,0 +1,8 @@
+{
+  "engine": "eSpeak NG / Spellophone",
+  "scripts": {
+    "en": "This is a research screening result, not a final diagnosis. A doctor should review both eyes and advise the next step. Please confirm the clinic day and arrange transport or an escort if needed.",
+    "hi": "यह शोध का नमूना है। यह अंतिम निदान नहीं है। दोनों आँखों की तस्वीर की जाँच डॉक्टर से कराएँ। डॉक्टर की सलाह के अनुसार आगे की जाँच कराएँ। यात्रा से पहले अस्पताल का दिन और समय पक्का करें। जरूरत हो तो साथ जाने वाले व्यक्ति और वाहन की व्यवस्था करें।"
+  },
+  "reviewStatus": "Draft scripts; have a clinician and native Hindi speaker review before field use."
+}

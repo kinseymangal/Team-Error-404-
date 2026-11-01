@@ -1,0 +1,73 @@
+{
+  "architecture": "Tiny U-Net, TensorFlow.js CPU",
+  "trainImages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "validationImages": [
+    7,
+    8
+  ],
+  "source": "IDRiD (CC BY 4.0)",
+  "input": "RGB / 255; source resized to width 1024; 48x48 lesion-balanced patches",
+  "trainPatches": 120,
+  "validationPatches": 24,
+  "epochs": 8,
+  "threshold": 0.5,
+  "metrics": {
+    "MA": {
+      "dice": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 209
+    },
+    "HE": {
+      "dice": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 1484
+    },
+    "EX": {
+      "dice": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 2114
+    }
+  },
+  "limitations": "Very small demonstration baseline. Metrics are on lesion-balanced validation patches, not full images or clinical evaluation. Tiny microaneurysm performance is limited. All outputs need review. Thresholds are tuned on lesion-centred development patches; false positives may be substantial. No clinical validation.",
+  "thresholds": {
+    "MA": 0.03,
+    "HE": 0.075,
+    "EX": 0.005
+  },
+  "thresholdSelection": {
+    "data": "48 lesion-centred patches from IDRiD 07 and 08 (development validation, not an untouched test)",
+    "metrics": {
+      "MA": {
+        "dice": 0.01515865820489574,
+        "threshold": 0.03,
+        "tp": 627,
+        "fp": 81345,
+        "fn": 126
+      },
+      "HE": {
+        "dice": 0.1265837648688954,
+        "threshold": 0.075,
+        "tp": 5390,
+        "fp": 74072,
+        "fn": 309
+      },
+      "EX": {
+        "dice": 0.11446984808961179,
+        "threshold": 0.005,
+        "tp": 6714,
+        "fp": 103878,
+        "fn": 0
+      }
+    }
+  }
+}

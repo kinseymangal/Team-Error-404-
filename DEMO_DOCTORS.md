@@ -1,0 +1,11 @@
+# Default demo doctor profiles
+
+Three fictional presets are included: Demo Dr. Asha (retina), Demo Dr. Rohan (glaucoma), Demo Dr. Meera (general eye care). Names and clinic details are fictional, registration strings explicitly are not medical licences, and email addresses use the reserved .invalid domain. These are user-requested hackathon test accounts, not verified real clinicians.
+
+After restarting, log in as an administrator and open Doctor verification > Add default demo doctors. This authenticated administrator action creates the accounts in MongoDB with verified=true for demo test access, isDemo=true, verificationKind=demo_access_only, and the actual administrator ID/time. It does not assert that medical credentials were checked. No accounts are silently inserted or assigned a fabricated administrator approval.
+
+Login email/password pairs are shown only after creation or an explicit Reset demo passwords action. Passwords are randomly generated, hashed through the existing scrypt helper, and never included in this ZIP. Repeating Add default demo doctors does not duplicate accounts or change existing passwords. Reset demo passwords affects only these fictional presets and invalidates their old sessions. Preset addresses belonging to non-demo accounts are never overwritten.
+
+Create a fictional patient using the new Demo/test patient checkbox, or load the existing sample workflow. Share that demo record with one of the enabled demo doctors, then log in with the displayed doctor credentials. Demo doctors can view/review only explicitly shared demo records. Consent routes reject attempts to share real patient records with demo accounts; share-all filters them out. Existing real doctors keep their existing authorization and verification rules. Demo cases are already excluded from the approved training dataset.
+
+Verified: all 45 tests passed, including administrator-only seeding, three account creation, idempotent repeat, demo login, real-record denial, demo-only sharing, password reset/session invalidation and unchanged patient sessions. Production build passed. Headless Chrome verified the three default profiles, administrator enable control, approval status and one-time credential display without browser errors. Software tests used temporary MongoDB and fictional records, not the live patient database.

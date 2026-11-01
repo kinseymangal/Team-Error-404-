@@ -1,0 +1,104 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import mongoose from 'mongoose';
+import {MongoMemoryServer} from 'mongodb-memory-server-core';
+import {makeApp,Case} from '../server/app.mjs';
+import {User,passwordFields} from '../server/auth.mjs';
+test('Account isolation, doctor verification and explicit patient consent are enforced',async()=>{
+ const mongo=await MongoMemoryServer.create({binary:{version:'7.0.24',downloadDir:'.runtime/bin'},instance:{storageEngine:'wiredTiger'}});let server;
+ try{await mongoose.connect(mongo.getUri());server=makeApp().listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));const base=`http://127.0.0.1:${server.address().port}`;
+ const request=async(route,method='GET',body,cookie)=>{const r=await fetch(base+route,{method,headers:{'content-type':'application/json',...(cookie?{cookie}:{})},body:body?JSON.stringify(body):undefined});return {status:r.status,body:await r.json(),cookie:r.headers.get('set-cookie')?.split(';')[0]};};
+ const account=async(email,role='patient')=>{const body={email,password:'A-real-test-password-123',role,name:'Test User',registration:'TEST123',specialization:'Retina',hospital:'Test Hospital',contact:'test contact'};assert.equal((await request('/api/auth/register','POST',body)).status,201);return request('/api/auth/login','POST',body);};
+ const a=await account('a@example.test'),b=await account('b@example.test'),d=await account('doctor@example.test','doctor');
+ assert.equal((await request('/api/cases')).status,401);
+ assert.equal((await request('/api/glaucoma/status')).status,401);
+ assert.equal((await request('/api/glaucoma/status','GET',null,a.cookie)).body.configured,true);
+ assert.equal((await request('/api/chat','POST',{message:'hello'})).status,401);
+ const chat=await request('/api/chat','POST',{message:'How do I upload an image?',language:'en'},a.cookie);assert.equal(chat.status,200);assert.equal(chat.body.mode,'project-help');assert.equal(chat.body.actions[0].page,'screen');
+ assert.equal((await request('/api/chat','POST',{message:'x'.repeat(2001)},a.cookie)).status,400);
+ const faqStatus=await request('/api/chat/status','GET',null,a.cookie);assert.equal(faqStatus.body.questionCount,90);
+ const questions=await request('/api/chat/questions','GET',null,a.cookie);assert.equal(questions.body.total,90);assert.equal(questions.body.items.length,10);assert.equal(questions.body.categories.length,9);
+ const filtered=await request('/api/chat/questions?category=Hospitals%20and%20appointments','GET',null,a.cookie);assert.equal(filtered.body.total,10);
+ const answer=await request('/api/chat','POST',{message:questions.body.items[0].question,faqId:questions.body.items[0].id,language:'hi'},a.cookie);assert.equal(answer.body.faqId,'faq-001');assert.match(answer.body.answer,/नेत्रिव/);
+ assert.equal((await request('/api/chat','POST',{message:'Selected unavailable question',faqId:'faq-999'},a.cookie)).status,404);
+ assert.equal((await request('/api/chat/status','GET',null,a.cookie)).body.questionCount,90);
+
+
+ const id=crypto.randomUUID(),patient={name:'Synthetic test',age:40,villageId:'indore-vijay',availableDays:[1,2,3,4,5,6]};
+ const c=await request('/api/cases','POST',{id,patient},a.cookie);assert.equal(c.status,201);assert.equal(c.body.ownerId,a.body.id);
+ assert.equal((await request(`/api/cases/${id}`,'GET',null,b.cookie)).status,404);assert.equal((await request('/api/cases','GET',null,b.cookie)).body.length,0);
+ assert.equal((await request(`/api/cases/${id}/review`,'POST',{},a.cookie)).status,403);assert.equal((await request(`/api/cases/${id}/review`,'POST',{},d.cookie)).status,403);
+ assert.equal((await request(`/api/cases/${id}/authorization`,'PUT',{version:1,doctorIds:[d.body.id],consent:true},a.cookie)).status,400);
+ await User.create({name:'Admin',email:'admin@example.test',role:'admin',verified:true,...await passwordFields('Administrator-Test-123')});
+ const administrator=await request('/api/auth/login','POST',{email:'admin@example.test',password:'Administrator-Test-123'});
+ const directory=await request('/api/directory/search','GET',null,a.cookie);assert.equal(directory.status,200);assert.equal(directory.body.total,25);assert.equal(directory.body.items.length,6);
+ const rau=await request('/api/directory/search?q=Rau&type=hospital','GET',null,a.cookie);assert.ok(rau.body.items.some(f=>f.id==='indore-hardia'));
+ const nearest=await request('/api/directory/search?sort=distance&lat=22.7559876&lng=75.8930208','GET',null,a.cookie);assert.equal(nearest.body.items[0].id,'indore-cfs');assert.ok(nearest.body.items[0].distanceKm<.01);
+ assert.equal((await request('/api/directory/search?sort=distance','GET',null,a.cookie)).status,400);
+ const listing=directory.body.mapItems.find(f=>f.id==='indore-hardia');const edit={...listing,name:'Hardia Eye Hospital — test',sourceChecked:true};
+ assert.equal((await request('/api/directory/'+listing.id,'PUT',edit,a.cookie)).status,403);
+ const changed=await request('/api/directory/'+listing.id,'PUT',edit,administrator.cookie);assert.equal(changed.status,200);assert.equal(changed.body.name,edit.name);
+ assert.equal((await request('/api/directory/'+listing.id,'PUT',edit,administrator.cookie)).status,409);
+ const persisted=await request('/api/directory?q=unused','GET',null,a.cookie);assert.equal(persisted.body.facilities.find(f=>f.id===listing.id).name,edit.name);
+ assert.equal((await request(`/api/auth/doctors/${d.body.id}/verify`,'POST',{verified:true},administrator.cookie)).status,200);
+ assert.equal((await request(`/api/cases/${id}/review`,'POST',{},administrator.cookie)).status,403);
+ assert.equal((await request(`/api/cases/${id}/prescriptions`,'POST',{},administrator.cookie)).status,403);
+ assert.equal((await request(`/api/cases/${id}`,'GET',null,d.cookie)).status,404);
+ const grant=await request(`/api/cases/${id}/authorization`,'PUT',{version:1,doctorIds:[d.body.id],consent:true},a.cookie);assert.equal(grant.status,200);
+ assert.equal((await request(`/api/cases/${id}`,'GET',null,d.cookie)).status,200);
+ assert.equal((await request('/api/auth/doctors/'+d.body.id+'/verify','POST',{verified:true},b.cookie)).status,403);
+ assert.equal((await request('/api/training','GET',null,a.cookie)).status,403);
+ const rxBody={version:grant.body.version,medicines:[{name:'Synthetic test medicine',dosage:'Test dose',frequency:'Test frequency',duration:'Test duration'}],observations:'Synthetic test only'};
+ assert.equal((await request(`/api/cases/${id}/prescriptions`,'POST',rxBody,a.cookie)).status,403);
+ assert.equal((await request(`/api/cases/${id}/prescriptions`,'POST',rxBody,d.cookie)).status,400);
+ await Case.updateOne({_id:id},{$set:{eyes:{left:{result:{status:'analyzed',grade:2}},right:{result:{status:'analyzed',grade:1}}}}});
+ const reviewed=await request(`/api/cases/${id}/review`,'POST',{version:grant.body.version,reviewer:'Test Doctor',assessment:'refer',grade:2,urgencyDays:14,notes:'Specific synthetic observations'},d.cookie);assert.equal(reviewed.status,200);rxBody.version=reviewed.body.version;
+ const issued=await request(`/api/cases/${id}/prescriptions`,'POST',rxBody,d.cookie);assert.equal(issued.status,201);assert.equal(issued.body.prescriptions.length,1);
+ const notes=await request('/api/notifications','GET',null,a.cookie);assert.equal(notes.body.length,2);
+ assert.equal((await request('/api/notifications','GET',null,b.cookie)).body.length,0);
+ assert.equal((await request(`/api/notifications/${notes.body[0]._id}/read`,'PATCH',{},b.cookie)).status,404);
+ assert.equal((await request(`/api/notifications/${notes.body[0]._id}/read`,'PATCH',{},a.cookie)).status,200);
+ const rxId=issued.body.prescriptions[0].id;
+ assert.equal((await request(`/api/cases/${id}/prescriptions/${rxId}/discontinue`,'PATCH',{version:issued.body.version,reason:'Test discontinuation'},a.cookie)).status,403);
+ const ended=await request(`/api/cases/${id}/prescriptions/${rxId}/discontinue`,'PATCH',{version:issued.body.version,reason:'Test discontinuation'},d.cookie);assert.equal(ended.status,200);assert.equal(ended.body.prescriptions[0].status,'discontinued');
+ const models=await request('/api/disease-models','GET',null,a.cookie);assert.deepEqual(models.body.map(m=>m.id),['dr','glaucoma','amd']);assert.equal(models.body.find(m=>m.id==='glaucoma').configured,true);assert.equal(models.body.find(m=>m.id==='amd').configured,false);
+ const snapshot=await request(`/api/cases/${id}`,'GET',null,d.cookie);
+ const marked=await request(`/api/cases/${id}/eyes/left/annotations`,'PUT',{version:snapshot.body.version,reviewer:'Spoofed name',regions:[{x:.4,y:.4,rx:.05,ry:.04,label:'Synthetic test annotation',category:'SE',status:'approved'}]},d.cookie);
+ assert.equal(marked.status,200);assert.equal(marked.body.review,null);assert.equal(marked.body.eyes.left.annotations[0].category,'SE');assert.equal(marked.body.eyes.left.annotations[0].status,'pending');assert.equal(marked.body.eyes.left.annotations[0].reviewer,'Test User');
+ const approval=await request(`/api/cases/${id}/review`,'POST',{version:marked.body.version,reviewer:'Doctor',assessment:'refer',grade:2,urgencyDays:14,findingsDecision:'approved'},d.cookie);assert.equal(approval.status,200);assert.equal(approval.body.eyes.left.annotations[0].status,'approved');assert.equal(approval.body.review.findingsDecision,'approved');
+ const unsupported=new FormData();unsupported.append('version',String(approval.body.version));unsupported.append('disease','amd');unsupported.append('image',new Blob(['not a diagnostic image'],{type:'image/jpeg'}),'test.jpg');const unsupportedResponse=await fetch(base+`/api/cases/${id}/eyes/left`,{method:'POST',headers:{cookie:a.cookie},body:unsupported});assert.equal(unsupportedResponse.status,503);
+ const secondId=crypto.randomUUID();assert.equal((await request('/api/cases','POST',{id:secondId,patient},a.cookie)).status,201);
+ assert.equal((await request('/api/cases/share-all','POST',{doctorId:d.body.id,consent:true},a.cookie)).status,200);
+ const doctorCases=await request('/api/cases','GET',null,d.cookie);assert.equal(doctorCases.body.length,2);assert.ok(doctorCases.body.some(c=>c._id===secondId));
+ assert.equal((await request('/api/cases','GET',null,b.cookie)).body.length,0);
+ assert.ok((await request('/api/notifications','GET',null,d.cookie)).body.length>=2);
+
+ // Demo doctor access is explicitly enabled by the signed-in administrator, never treated as real credentials.
+ assert.equal((await request('/api/auth/demo-doctors','POST',{},a.cookie)).status,403);
+ const defaults=await request('/api/auth/demo-doctors','GET',null,administrator.cookie);assert.equal(defaults.body.presets.length,3);
+ const created=await request('/api/auth/demo-doctors','POST',{},administrator.cookie);assert.equal(created.status,200);assert.equal(created.body.credentials.length,3);assert.equal(created.body.accounts.length,3);
+ assert.ok(created.body.accounts.every(u=>u.isDemo&&u.verified&&u.verificationKind==='demo_access_only'&&u.verifiedById===administrator.body.id));
+ assert.equal((await request('/api/auth/demo-doctors','POST',{},administrator.cookie)).body.credentials.length,0);
+ const demoAccount=created.body.accounts[0],secret=created.body.credentials.find(c=>c.email===demoAccount.email);
+ const demoLogin=await request('/api/auth/login','POST',{email:secret.email,password:secret.temporaryPassword});assert.equal(demoLogin.status,200);assert.equal(demoLogin.body.isDemo,true);
+ const real=await request(`/api/cases/${id}`,'GET',null,a.cookie);
+ assert.equal((await request(`/api/cases/${id}/authorization`,'PUT',{version:real.body.version,doctorIds:[demoAccount.id],consent:true},a.cookie)).status,400);
+ assert.equal((await request(`/api/cases/${id}`,'GET',null,demoLogin.cookie)).status,404);
+ const demoCaseId=crypto.randomUUID();assert.equal((await request('/api/cases','POST',{id:demoCaseId,patient:{...patient,isDemo:true}},a.cookie)).status,201);
+ assert.equal((await request('/api/cases/share-all','POST',{doctorId:demoAccount.id,consent:true},a.cookie)).body.shared,1);
+ assert.equal((await request(`/api/cases/${demoCaseId}`,'GET',null,demoLogin.cookie)).status,200);
+ assert.equal((await request('/api/cases','GET',null,demoLogin.cookie)).body.length,1);
+ const reset=await request('/api/auth/demo-doctors','POST',{resetPasswords:true},administrator.cookie);assert.equal(reset.body.credentials.length,3);
+ assert.equal((await request('/api/auth/me','GET',null,demoLogin.cookie)).status,401);
+ assert.equal((await request('/api/auth/me','GET',null,a.cookie)).status,200);
+
+ // Background requests must never consume the credential-attempt budget.
+ for(let i=0;i<45;i++){assert.equal((await request('/api/auth/me','GET',null,a.cookie)).status,200);assert.equal((await request('/api/auth/doctors','GET',null,a.cookie)).status,200);}
+ for(let i=0;i<6;i++)assert.equal((await request('/api/auth/login','POST',{email:'a@example.test',password:'A-real-test-password-123'})).status,200);
+ for(let i=0;i<40;i++)assert.equal((await request('/api/auth/login','POST',{email:'missing@example.test',password:'wrong password'})).status,401);
+ const blocked=await request('/api/auth/login','POST',{email:'missing@example.test',password:'wrong password'});assert.equal(blocked.status,429);assert.ok(blocked.body.retryAfter>0);
+ assert.equal((await request('/api/auth/me','GET',null,a.cookie)).status,200);
+ assert.equal((await request('/api/auth/doctors','GET',null,a.cookie)).status,200);
+ await request('/api/auth/logout','POST',{},a.cookie);assert.equal((await request('/api/cases','GET',null,a.cookie)).status,401);
+ }finally{if(server)await new Promise(r=>server.close(r));await mongoose.disconnect();await mongo.stop();}
+});

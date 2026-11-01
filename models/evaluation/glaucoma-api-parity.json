@@ -1,0 +1,16 @@
+{
+  "images": 84,
+  "maximumScoreDifference": 0.00002171277162699159,
+  "decisionMismatches": 0,
+  "confusionMatrix": [
+    [
+      46,
+      21
+    ],
+    [
+      5,
+      12
+    ]
+  ],
+  "passed": true
+}

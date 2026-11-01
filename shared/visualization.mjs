@@ -1,0 +1,14 @@
+import {maskSummary} from './report.mjs';
+export const lesionCategories={MA:{name:'Microaneurysms',hi:'सूक्ष्म रक्तवाहिका उभार',color:'#ff4d59'},HE:{name:'Hemorrhages',hi:'रक्तस्राव',color:'#ff923f'},EX:{name:'Hard exudates',hi:'हार्ड एक्स्यूडेट',color:'#ffe065'},SE:{name:'Soft exudates',hi:'सॉफ्ट एक्स्यूडेट',color:'#6be28a'},OTHER:{name:'Other finding',hi:'अन्य निष्कर्ष',color:'#7ad3ff'}};
+export const diseases=[
+ {id:'dr',name:'Diabetic Retinopathy',hi:'डायबिटिक रेटिनोपैथी',targets:'Microaneurysms, hemorrhages, hard/soft exudates and abnormal vessels',targetsHi:'सूक्ष्म रक्तवाहिका उभार, रक्तस्राव, एक्स्यूडेट और असामान्य रक्तवाहिकाएँ',note:'DR grading model available. Lesion localization remains experimental; four lesion categories are supported by the pretrained segmenter. Abnormal-vessel detection is not configured.',noteHi:'DR ग्रेडिंग मॉडल उपलब्ध है। घाव स्थान प्रयोगात्मक हैं; प्रीट्रेंड मॉडल चार घाव प्रकार का अनुमान लगाता है। असामान्य रक्तवाहिका पहचान उपलब्ध नहीं है।'},
+ {id:'glaucoma',name:'Glaucoma',hi:'ग्लूकोमा',targets:'Optic-disc anatomy and binary glaucoma screening',targetsHi:'ऑप्टिक डिस्क संरचना और द्विआधारी ग्लूकोमा स्क्रीनिंग',note:'Binary glaucoma screening is enabled. This candidate failed validation; use its outputs for testing only. No clinical severity or cup-to-disc ratio is estimated.',noteHi:'द्विआधारी ग्लूकोमा स्क्रीनिंग सक्रिय है। उम्मीदवार सत्यापन में विफल रहा; परिणाम केवल परीक्षण के लिए हैं। चिकित्सकीय स्तर या कप-डिस्क अनुपात नहीं दिया जाता।'},
+ {id:'amd',name:'Age-Related Macular Degeneration (AMD)',hi:'आयु-संबंधी मैक्युलर डिजनरेशन (AMD)',targets:'Drusen and macular pigmentary abnormalities',targetsHi:'ड्रूज़न और मैक्युला के वर्णक बदलाव',note:'Coming soon. A retina specialist may require OCT to assess macular changes.',noteHi:'जल्द आ रहा है। मैक्युला बदलाव की जाँच के लिए रेटिना विशेषज्ञ को OCT की आवश्यकता हो सकती है।'}
+];
+export function boxFor(region){const x=Math.max(0,region.x-region.rx),y=Math.max(0,region.y-region.ry);return {x,y,width:Math.min(1-x,region.rx*2),height:Math.min(1-y,region.ry*2)};}
+export function cropFor(region){const b=boxFor(region),w=Math.min(1,Math.max(.1,b.width*1.6)),h=Math.min(1,Math.max(.1,b.height*1.6));return {x:Math.max(0,Math.min(1-w,region.x-w/2)),y:Math.max(0,Math.min(1-h,region.y-h/2)),width:w,height:h};}
+export function visibleFindings(eye,enabled){
+ const summary=maskSummary(eye?.result?.masks),auto=(eye?.findingsDecision==='rejected'?[]:summary.regions).map((r,i)=>({...r,key:'A'+(i+1),category:r.code,source:'model',label:lesionCategories[r.code]?.name||r.code}));
+ const manual=(eye?.annotations||[]).map((r,i)=>({...r,key:'D'+(i+1),category:r.category||'OTHER',source:r.status==='approved'?'doctor-confirmed':'doctor-annotation'})).filter(r=>r.status!=='rejected');
+ return [...auto,...manual].filter(r=>enabled?.[r.category]!==false);
+}

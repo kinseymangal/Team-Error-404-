@@ -1,0 +1,727 @@
+{
+  "architecture": "EfficientNet-B0 ImageNet initialization; APTOS classifier training and later-block supervised fine-tuning",
+  "trainingImages": 2159,
+  "validationImages": 469,
+  "testImages": 465,
+  "bestEpoch": 0,
+  "baselineValidation": {
+    "images": 469,
+    "accuracy": 0.8059701492537313,
+    "macroF1": 0.6255197238210077,
+    "quadraticWeightedKappa": 0.8611618398490961,
+    "perClass": [
+      {
+        "grade": 0,
+        "support": 228,
+        "predictedCount": 235,
+        "precision": 0.9617021276595744,
+        "recall": 0.9912280701754386,
+        "f1": 0.976241900647948
+      },
+      {
+        "grade": 1,
+        "support": 47,
+        "predictedCount": 49,
+        "precision": 0.5714285714285714,
+        "recall": 0.5957446808510638,
+        "f1": 0.5833333333333334
+      },
+      {
+        "grade": 2,
+        "support": 128,
+        "predictedCount": 141,
+        "precision": 0.7163120567375887,
+        "recall": 0.7890625,
+        "f1": 0.7509293680297399
+      },
+      {
+        "grade": 3,
+        "support": 27,
+        "predictedCount": 18,
+        "precision": 0.4444444444444444,
+        "recall": 0.2962962962962963,
+        "f1": 0.3555555555555555
+      },
+      {
+        "grade": 4,
+        "support": 39,
+        "predictedCount": 26,
+        "precision": 0.5769230769230769,
+        "recall": 0.38461538461538464,
+        "f1": 0.46153846153846156
+      }
+    ],
+    "confusionMatrix": [
+      [
+        226,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        28,
+        14,
+        0,
+        0
+      ],
+      [
+        3,
+        14,
+        101,
+        5,
+        5
+      ],
+      [
+        0,
+        1,
+        12,
+        8,
+        6
+      ],
+      [
+        1,
+        4,
+        14,
+        5,
+        15
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.8015909092293845,
+      "validation": {
+        "images": 469,
+        "accuracy": 0.7995735607675906,
+        "macroF1": 0.6097076232945798,
+        "quadraticWeightedKappa": 0.8496990169330042,
+        "perClass": [
+          {
+            "grade": 0,
+            "support": 228,
+            "predictedCount": 232,
+            "precision": 0.9698275862068966,
+            "recall": 0.9868421052631579,
+            "f1": 0.9782608695652174
+          },
+          {
+            "grade": 1,
+            "support": 47,
+            "predictedCount": 49,
+            "precision": 0.5510204081632653,
+            "recall": 0.574468085106383,
+            "f1": 0.5625
+          },
+          {
+            "grade": 2,
+            "support": 128,
+            "predictedCount": 145,
+            "precision": 0.7034482758620689,
+            "recall": 0.796875,
+            "f1": 0.7472527472527473
+          },
+          {
+            "grade": 3,
+            "support": 27,
+            "predictedCount": 19,
+            "precision": 0.42105263157894735,
+            "recall": 0.2962962962962963,
+            "f1": 0.34782608695652173
+          },
+          {
+            "grade": 4,
+            "support": 39,
+            "predictedCount": 24,
+            "precision": 0.5416666666666666,
+            "recall": 0.3333333333333333,
+            "f1": 0.4126984126984126
+          }
+        ],
+        "confusionMatrix": [
+          [
+            225,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            27,
+            18,
+            0,
+            0
+          ],
+          [
+            3,
+            14,
+            102,
+            4,
+            5
+          ],
+          [
+            0,
+            1,
+            12,
+            8,
+            6
+          ],
+          [
+            2,
+            4,
+            13,
+            7,
+            13
+          ]
+        ]
+      },
+      "seconds": 58.43081784248352
+    },
+    {
+      "epoch": 2,
+      "loss": 0.7260845286978616,
+      "validation": {
+        "images": 469,
+        "accuracy": 0.7867803837953091,
+        "macroF1": 0.6172716682224879,
+        "quadraticWeightedKappa": 0.843198771801723,
+        "perClass": [
+          {
+            "grade": 0,
+            "support": 228,
+            "predictedCount": 234,
+            "precision": 0.9658119658119658,
+            "recall": 0.9912280701754386,
+            "f1": 0.9783549783549784
+          },
+          {
+            "grade": 1,
+            "support": 47,
+            "predictedCount": 57,
+            "precision": 0.5614035087719298,
+            "recall": 0.6808510638297872,
+            "f1": 0.6153846153846153
+          },
+          {
+            "grade": 2,
+            "support": 128,
+            "predictedCount": 116,
+            "precision": 0.7327586206896551,
+            "recall": 0.6640625,
+            "f1": 0.6967213114754097
+          },
+          {
+            "grade": 3,
+            "support": 27,
+            "predictedCount": 23,
+            "precision": 0.391304347826087,
+            "recall": 0.3333333333333333,
+            "f1": 0.36
+          },
+          {
+            "grade": 4,
+            "support": 39,
+            "predictedCount": 39,
+            "precision": 0.4358974358974359,
+            "recall": 0.4358974358974359,
+            "f1": 0.4358974358974359
+          }
+        ],
+        "confusionMatrix": [
+          [
+            226,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            32,
+            13,
+            0,
+            0
+          ],
+          [
+            3,
+            19,
+            85,
+            7,
+            14
+          ],
+          [
+            0,
+            1,
+            9,
+            9,
+            8
+          ],
+          [
+            3,
+            3,
+            9,
+            7,
+            17
+          ]
+        ]
+      },
+      "seconds": 57.41614770889282
+    },
+    {
+      "epoch": 3,
+      "loss": 0.6863018231259452,
+      "validation": {
+        "images": 469,
+        "accuracy": 0.7846481876332623,
+        "macroF1": 0.6155995949648808,
+        "quadraticWeightedKappa": 0.8551659372397541,
+        "perClass": [
+          {
+            "grade": 0,
+            "support": 228,
+            "predictedCount": 230,
+            "precision": 0.9782608695652174,
+            "recall": 0.9868421052631579,
+            "f1": 0.982532751091703
+          },
+          {
+            "grade": 1,
+            "support": 47,
+            "predictedCount": 58,
+            "precision": 0.5517241379310345,
+            "recall": 0.6808510638297872,
+            "f1": 0.6095238095238096
+          },
+          {
+            "grade": 2,
+            "support": 128,
+            "predictedCount": 107,
+            "precision": 0.7663551401869159,
+            "recall": 0.640625,
+            "f1": 0.6978723404255319
+          },
+          {
+            "grade": 3,
+            "support": 27,
+            "predictedCount": 22,
+            "precision": 0.36363636363636365,
+            "recall": 0.2962962962962963,
+            "f1": 0.32653061224489793
+          },
+          {
+            "grade": 4,
+            "support": 39,
+            "predictedCount": 52,
+            "precision": 0.40384615384615385,
+            "recall": 0.5384615384615384,
+            "f1": 0.46153846153846156
+          }
+        ],
+        "confusionMatrix": [
+          [
+            225,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            32,
+            12,
+            0,
+            1
+          ],
+          [
+            1,
+            19,
+            82,
+            7,
+            19
+          ],
+          [
+            0,
+            1,
+            7,
+            8,
+            11
+          ],
+          [
+            2,
+            3,
+            6,
+            7,
+            21
+          ]
+        ]
+      },
+      "seconds": 56.17941427230835
+    },
+    {
+      "epoch": 4,
+      "loss": 0.6472456127405166,
+      "validation": {
+        "images": 469,
+        "accuracy": 0.7889125799573561,
+        "macroF1": 0.6189649631948284,
+        "quadraticWeightedKappa": 0.847681048184514,
+        "perClass": [
+          {
+            "grade": 0,
+            "support": 228,
+            "predictedCount": 233,
+            "precision": 0.9656652360515021,
+            "recall": 0.9868421052631579,
+            "f1": 0.9761388286334057
+          },
+          {
+            "grade": 1,
+            "support": 47,
+            "predictedCount": 60,
+            "precision": 0.5666666666666667,
+            "recall": 0.723404255319149,
+            "f1": 0.6355140186915887
+          },
+          {
+            "grade": 2,
+            "support": 128,
+            "predictedCount": 113,
+            "precision": 0.7522123893805309,
+            "recall": 0.6640625,
+            "f1": 0.7053941908713692
+          },
+          {
+            "grade": 3,
+            "support": 27,
+            "predictedCount": 21,
+            "precision": 0.38095238095238093,
+            "recall": 0.2962962962962963,
+            "f1": 0.3333333333333333
+          },
+          {
+            "grade": 4,
+            "support": 39,
+            "predictedCount": 42,
+            "precision": 0.42857142857142855,
+            "recall": 0.46153846153846156,
+            "f1": 0.4444444444444445
+          }
+        ],
+        "confusionMatrix": [
+          [
+            225,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            34,
+            11,
+            0,
+            0
+          ],
+          [
+            4,
+            18,
+            85,
+            5,
+            16
+          ],
+          [
+            0,
+            1,
+            10,
+            8,
+            8
+          ],
+          [
+            2,
+            4,
+            7,
+            8,
+            18
+          ]
+        ]
+      },
+      "seconds": 56.08339333534241
+    },
+    {
+      "epoch": 5,
+      "loss": 0.6106842276122835,
+      "validation": {
+        "images": 469,
+        "accuracy": 0.7931769722814499,
+        "macroF1": 0.6225309009090261,
+        "quadraticWeightedKappa": 0.8505576208178438,
+        "perClass": [
+          {
+            "grade": 0,
+            "support": 228,
+            "predictedCount": 230,
+            "precision": 0.9782608695652174,
+            "recall": 0.9868421052631579,
+            "f1": 0.982532751091703
+          },
+          {
+            "grade": 1,
+            "support": 47,
+            "predictedCount": 62,
+            "precision": 0.5483870967741935,
+            "recall": 0.723404255319149,
+            "f1": 0.6238532110091743
+          },
+          {
+            "grade": 2,
+            "support": 128,
+            "predictedCount": 115,
+            "precision": 0.7478260869565218,
+            "recall": 0.671875,
+            "f1": 0.7078189300411522
+          },
+          {
+            "grade": 3,
+            "support": 27,
+            "predictedCount": 15,
+            "precision": 0.4666666666666667,
+            "recall": 0.25925925925925924,
+            "f1": 0.33333333333333337
+          },
+          {
+            "grade": 4,
+            "support": 39,
+            "predictedCount": 47,
+            "precision": 0.425531914893617,
+            "recall": 0.5128205128205128,
+            "f1": 0.4651162790697675
+          }
+        ],
+        "confusionMatrix": [
+          [
+            225,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            34,
+            11,
+            0,
+            0
+          ],
+          [
+            1,
+            20,
+            86,
+            4,
+            17
+          ],
+          [
+            0,
+            1,
+            9,
+            7,
+            10
+          ],
+          [
+            2,
+            4,
+            9,
+            4,
+            20
+          ]
+        ]
+      },
+      "seconds": 56.05169486999512
+    },
+    {
+      "epoch": 6,
+      "loss": 0.5930277281337314,
+      "validation": {
+        "images": 469,
+        "accuracy": 0.7846481876332623,
+        "macroF1": 0.6151817237798547,
+        "quadraticWeightedKappa": 0.8526632858059288,
+        "perClass": [
+          {
+            "grade": 0,
+            "support": 228,
+            "predictedCount": 231,
+            "precision": 0.974025974025974,
+            "recall": 0.9868421052631579,
+            "f1": 0.9803921568627451
+          },
+          {
+            "grade": 1,
+            "support": 47,
+            "predictedCount": 60,
+            "precision": 0.5333333333333333,
+            "recall": 0.6808510638297872,
+            "f1": 0.5981308411214953
+          },
+          {
+            "grade": 2,
+            "support": 128,
+            "predictedCount": 112,
+            "precision": 0.75,
+            "recall": 0.65625,
+            "f1": 0.7
+          },
+          {
+            "grade": 3,
+            "support": 27,
+            "predictedCount": 24,
+            "precision": 0.375,
+            "recall": 0.3333333333333333,
+            "f1": 0.35294117647058826
+          },
+          {
+            "grade": 4,
+            "support": 39,
+            "predictedCount": 42,
+            "precision": 0.42857142857142855,
+            "recall": 0.46153846153846156,
+            "f1": 0.4444444444444445
+          }
+        ],
+        "confusionMatrix": [
+          [
+            225,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            32,
+            12,
+            0,
+            0
+          ],
+          [
+            1,
+            20,
+            84,
+            7,
+            16
+          ],
+          [
+            0,
+            1,
+            9,
+            9,
+            8
+          ],
+          [
+            2,
+            4,
+            7,
+            8,
+            18
+          ]
+        ]
+      },
+      "seconds": 54.942792654037476
+    }
+  ],
+  "test": {
+    "images": 465,
+    "accuracy": 0.7741935483870968,
+    "macroF1": 0.5500100351078148,
+    "quadraticWeightedKappa": 0.8421708674457663,
+    "perClass": [
+      {
+        "grade": 0,
+        "support": 228,
+        "predictedCount": 237,
+        "precision": 0.9451476793248945,
+        "recall": 0.9824561403508771,
+        "f1": 0.9634408602150537
+      },
+      {
+        "grade": 1,
+        "support": 47,
+        "predictedCount": 35,
+        "precision": 0.5428571428571428,
+        "recall": 0.40425531914893614,
+        "f1": 0.46341463414634143
+      },
+      {
+        "grade": 2,
+        "support": 127,
+        "predictedCount": 150,
+        "precision": 0.6666666666666666,
+        "recall": 0.7874015748031497,
+        "f1": 0.7220216606498194
+      },
+      {
+        "grade": 3,
+        "support": 24,
+        "predictedCount": 20,
+        "precision": 0.2,
+        "recall": 0.16666666666666666,
+        "f1": 0.1818181818181818
+      },
+      {
+        "grade": 4,
+        "support": 39,
+        "predictedCount": 23,
+        "precision": 0.5652173913043478,
+        "recall": 0.3333333333333333,
+        "f1": 0.4193548387096774
+      }
+    ],
+    "confusionMatrix": [
+      [
+        224,
+        2,
+        2,
+        0,
+        0
+      ],
+      [
+        8,
+        19,
+        19,
+        1,
+        0
+      ],
+      [
+        5,
+        8,
+        100,
+        10,
+        4
+      ],
+      [
+        0,
+        1,
+        13,
+        4,
+        6
+      ],
+      [
+        0,
+        5,
+        16,
+        5,
+        13
+      ]
+    ]
+  },
+  "activeModelChanged": false,
+  "preprocessing": "RGB, threshold black border crop at max(10,5% peak channel), bilinear 224 square, ImageNet normalization",
+  "inputSize": 224,
+  "limitations": [
+    "Patient-level separation cannot be guaranteed because the supplied CSV contains no patient IDs.",
+    "Internal held-out APTOS evaluation is not external clinical validation.",
+    "The legacy APTOS-pretrained model may have seen these images; its scores are not an independent comparison."
+  ]
+}

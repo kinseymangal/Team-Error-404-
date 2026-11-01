@@ -1,0 +1,21 @@
+{
+  "sha256": "fea273100ee9aed56f09440cb541d800a6f9212e9160857fe37bbf02bf3d9484",
+  "source": {
+    "repo": "pamixsun/segformer_for_optic_disc_cup_segmentation",
+    "revision": "a0463fb6c2bf184cf398e5fd82a8194e01e66e7f",
+    "license": "Apache-2.0"
+  },
+  "discEnabled": true,
+  "cupEnabled": false,
+  "evaluation": {
+    "images": 16,
+    "expertComparisons": 32,
+    "meanDiscDice": 0.8239145693786057,
+    "meanCupDice": 0.5442812006303855
+  },
+  "limitations": [
+    "Experimental anatomical segmentation, not a glaucoma defect mask.",
+    "Cup masks withheld: mean Dice 0.544 on the small evaluation.",
+    "16-image PAPILA evaluation; upstream overlap not independently audited; no clinical validation."
+  ]
+}

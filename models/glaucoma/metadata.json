@@ -1,0 +1,13 @@
+{
+  "architecture": "netriv-glaucoma-efficientnet-b0-v1",
+  "inputSize": 224,
+  "labels": [
+    "Lower model suspicion",
+    "Glaucoma suspected"
+  ],
+  "threshold": 0.10319450125098228,
+  "preprocessing": "Sharp sRGB RGB, contain 224 black padding, linear, ImageNet mean/std",
+  "modelSha256": "9be8f35354bb2346b2419df26822869826269522caaecc7c8c77354995850613",
+  "clinicalValidation": false,
+  "engineeringGatePassed": false
+}

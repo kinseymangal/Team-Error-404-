@@ -1,0 +1,38 @@
+.complete-screening-report{display:none}
+@media print{
+ @page{size:A4;margin:12mm}
+ html,body{height:auto!important;overflow:visible!important;background:#fff!important;color:#111!important;color-scheme:light!important}
+ .complete-screening-report{display:block!important;width:100%;max-width:none;margin:0;padding:0;font:10pt/1.4 Arial,"Nirmala UI",sans-serif!important;color:#111!important;background:#fff!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .complete-screening-report *{box-sizing:border-box;animation:none!important;transition:none!important}
+ .complete-screening-report .pdf-header{display:flex;justify-content:space-between;align-items:center;gap:8mm;border-bottom:2px solid #1d4ed8;padding-bottom:5mm;margin-bottom:4mm;break-inside:avoid}
+ .complete-screening-report .pdf-header .brand-lockup{max-width:65mm}
+ .complete-screening-report h1{font-size:17pt!important;line-height:1.2;margin:0 0 2mm!important}
+ .complete-screening-report h2{font-size:13pt!important;margin:4mm 0 3mm!important;break-after:avoid}
+ .complete-screening-report h3{font-size:11pt!important;margin:4mm 0 2mm!important;break-after:avoid}
+ .complete-screening-report p,.complete-screening-report li{font-size:9pt!important;line-height:1.4!important;margin:2mm 0!important;color:#111!important;orphans:3;widows:3}
+ .pdf-patient{display:grid;grid-template-columns:1fr 1fr;gap:2mm 6mm;margin:0 0 4mm;break-inside:avoid}.pdf-patient div{display:flex;gap:3mm}.pdf-patient dt{font-weight:700;white-space:nowrap}.pdf-patient dd{margin:0;overflow-wrap:anywhere;font-size:9pt}
+ .pdf-eye-section{break-before:auto!important;padding:0!important;margin:0}.pdf-eye-section+.pdf-eye-section{break-before:page!important}.pdf-eye-section.pdf-missing-eye{break-before:auto!important;break-inside:avoid;border:1px solid #cbd5e1;padding:3mm!important;margin-top:4mm}
+ .pdf-result{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3mm;padding:3mm;border:1px solid #bfdbfe;background:#eff6ff!important;break-inside:avoid}.pdf-result span{display:block;font-size:8pt}.pdf-result strong{display:block;font-size:11pt;color:#102a56!important}
+ .complete-screening-report table{border-collapse:collapse;width:100%;margin:3mm 0;break-inside:avoid}.complete-screening-report th,.complete-screening-report td{display:table-cell!important;font-size:9pt!important;padding:1.7mm 2mm!important;border:1px solid #d1d9e6!important;text-align:left!important;color:#111!important;background:#fff!important}.complete-screening-report .pdf-selected td{background:#eaf2ff!important;font-weight:700}
+ .pdf-three-images{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3mm;break-inside:avoid;margin:4mm 0}.pdf-image{margin:0;border:1px solid #cbd5e1;padding:2mm;break-inside:avoid;min-width:0}.pdf-image figcaption{font-size:9pt;font-weight:700;margin-bottom:2mm}.pdf-image-stack{position:relative;width:100%;background:#000!important;overflow:hidden}.pdf-image-stack>img{display:block;width:100%;height:100%;object-fit:fill}.pdf-image-stack>.pdf-overlay{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.pdf-image>p{font-size:7.5pt!important}
+ .pdf-legend{display:flex;flex-wrap:wrap;gap:2mm 4mm;font-size:8pt;break-inside:avoid}.pdf-legend span{display:inline-flex;align-items:center;gap:1.5mm}.pdf-legend i{display:inline-block;width:3mm;height:3mm;border:1px solid #888}
+ .complete-screening-report .pdf-note{font-size:8pt!important;color:#334155!important}.pdf-clinical{break-inside:avoid;margin-top:4mm;border-top:1px solid #cbd5e1}.complete-screening-report .pdf-footer{display:block!important;padding:3mm 0!important;margin:4mm 0 0;font-size:8pt;color:#334155!important;border-top:1px solid #cbd5e1}
+}
+
+@media print{.complete-screening-report+.complete-screening-report{break-before:page}.complete-screening-report .pdf-header .brand-lockup{max-width:58mm}.glaucoma-print .pdf-result{grid-template-columns:2fr 1fr}}
+
+@media print{
+ .complete-screening-report .pdf-header{padding-bottom:2mm;margin-bottom:2mm;gap:5mm}
+ .complete-screening-report .pdf-header .brand-identity{display:flex!important;align-items:center;gap:2mm}
+ .complete-screening-report .pdf-header .netriv-mark{width:14mm!important;height:14mm!important;object-fit:contain}
+ .complete-screening-report .pdf-header .brand-word{font-size:28pt!important;line-height:1.05!important}
+ .complete-screening-report .pdf-header .brand-tagline{font-size:7pt!important;line-height:1.2!important;white-space:nowrap}
+ .complete-screening-report h1{font-size:15pt!important}.complete-screening-report h2{margin:3mm 0 2mm!important}.complete-screening-report h3{margin:2mm 0 1mm!important}
+ .complete-screening-report p,.complete-screening-report li{margin:1mm 0!important}
+ .complete-screening-report table{margin:2mm 0}.complete-screening-report th,.complete-screening-report td{padding:1.1mm 2mm!important}
+ .pdf-patient{gap:1mm 5mm;margin-bottom:2mm}.pdf-three-images{margin:2mm 0}.pdf-clinical{margin-top:2mm}
+ .complete-screening-report .pdf-footer{padding:2mm 0!important;margin-top:2mm!important}
+ .pdf-eye-section>ul{padding-left:5mm;margin:1mm 0}
+}
+
+@media print{.complete-screening-report .pdf-header{overflow:hidden;break-inside:avoid!important}}

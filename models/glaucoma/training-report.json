@@ -1,0 +1,468 @@
+{
+  "status": "completed",
+  "endpoint": "Binary glaucoma vs healthy reference labels; excludes suspects",
+  "architecture": "EfficientNet-B0 ImageNet initialization; binary supervised head and later-block fine-tuning",
+  "selected": {
+    "method": "later-block fine-tuning",
+    "epoch": 2,
+    "validation": {
+      "images": 84,
+      "support": {
+        "healthy": 66,
+        "glaucoma": 18
+      },
+      "threshold": 0.10319450125098228,
+      "accuracy": 0.7023809523809523,
+      "sensitivity": 0.8333333333333334,
+      "specificity": 0.6666666666666666,
+      "precision": 0.40540540540540543,
+      "macroF1": 0.662107803700724,
+      "balancedAccuracy": 0.75,
+      "auroc": 0.8434343434343434,
+      "confusionMatrix": [
+        [
+          44,
+          22
+        ],
+        [
+          3,
+          15
+        ]
+      ]
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.39604684710502625,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.16929998248815536,
+        "accuracy": 0.6785714285714286,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6363636363636364,
+        "precision": 0.38461538461538464,
+        "macroF1": 0.6415362731152205,
+        "balancedAccuracy": 0.7348484848484849,
+        "auroc": 0.82996632996633,
+        "confusionMatrix": [
+          [
+            42,
+            24
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 2,
+      "loss": 0.2987313676964153,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.10319450125098228,
+        "accuracy": 0.7023809523809523,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6666666666666666,
+        "precision": 0.40540540540540543,
+        "macroF1": 0.662107803700724,
+        "balancedAccuracy": 0.75,
+        "auroc": 0.8434343434343434,
+        "confusionMatrix": [
+          [
+            44,
+            22
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 3,
+      "loss": 0.26068938049403106,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.07244931906461716,
+        "accuracy": 0.6666666666666666,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6212121212121212,
+        "precision": 0.375,
+        "macroF1": 0.6313479623824452,
+        "balancedAccuracy": 0.7272727272727273,
+        "auroc": 0.8316498316498316,
+        "confusionMatrix": [
+          [
+            41,
+            25
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 4,
+      "loss": 0.2610696256160736,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.09874437376856804,
+        "accuracy": 0.6785714285714286,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6363636363636364,
+        "precision": 0.38461538461538464,
+        "macroF1": 0.6415362731152205,
+        "balancedAccuracy": 0.7348484848484849,
+        "auroc": 0.8223905723905723,
+        "confusionMatrix": [
+          [
+            42,
+            24
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 5,
+      "loss": 0.2222086854956367,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.19271890819072723,
+        "accuracy": 0.6785714285714286,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6363636363636364,
+        "precision": 0.38461538461538464,
+        "macroF1": 0.6415362731152205,
+        "balancedAccuracy": 0.7348484848484849,
+        "auroc": 0.8148148148148148,
+        "confusionMatrix": [
+          [
+            42,
+            24
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 6,
+      "loss": 0.20130496268922632,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.11573228240013123,
+        "accuracy": 0.7142857142857143,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6818181818181818,
+        "precision": 0.4166666666666667,
+        "macroF1": 0.672514619883041,
+        "balancedAccuracy": 0.7575757575757576,
+        "auroc": 0.8308080808080808,
+        "confusionMatrix": [
+          [
+            45,
+            21
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 7,
+      "loss": 0.18051092326641083,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.04927847161889076,
+        "accuracy": 0.6904761904761905,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6515151515151515,
+        "precision": 0.39473684210526316,
+        "macroF1": 0.6517857142857143,
+        "balancedAccuracy": 0.7424242424242424,
+        "auroc": 0.8207070707070707,
+        "confusionMatrix": [
+          [
+            43,
+            23
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 8,
+      "loss": 0.19821905683387409,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.035672854632139206,
+        "accuracy": 0.7142857142857143,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6818181818181818,
+        "precision": 0.4166666666666667,
+        "macroF1": 0.672514619883041,
+        "balancedAccuracy": 0.7575757575757576,
+        "auroc": 0.8223905723905723,
+        "confusionMatrix": [
+          [
+            45,
+            21
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 9,
+      "loss": 0.1633843549273231,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.04034185782074928,
+        "accuracy": 0.6666666666666666,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.6212121212121212,
+        "precision": 0.375,
+        "macroF1": 0.6313479623824452,
+        "balancedAccuracy": 0.7272727272727273,
+        "auroc": 0.819023569023569,
+        "confusionMatrix": [
+          [
+            41,
+            25
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 10,
+      "loss": 0.13711998679421164,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.10279211774468422,
+        "accuracy": 0.6071428571428571,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.5454545454545454,
+        "precision": 0.3333333333333333,
+        "macroF1": 0.5809523809523809,
+        "balancedAccuracy": 0.6893939393939394,
+        "auroc": 0.8005050505050505,
+        "confusionMatrix": [
+          [
+            36,
+            30
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 11,
+      "loss": 0.14631715552373367,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.045593198388814926,
+        "accuracy": 0.5595238095238095,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.48484848484848486,
+        "precision": 0.30612244897959184,
+        "macroF1": 0.5407122801832422,
+        "balancedAccuracy": 0.6590909090909092,
+        "auroc": 0.8021885521885522,
+        "confusionMatrix": [
+          [
+            32,
+            34
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 12,
+      "loss": 0.12180982530117035,
+      "validation": {
+        "images": 84,
+        "support": {
+          "healthy": 66,
+          "glaucoma": 18
+        },
+        "threshold": 0.06262234412133694,
+        "accuracy": 0.5714285714285714,
+        "sensitivity": 0.8333333333333334,
+        "specificity": 0.5,
+        "precision": 0.3125,
+        "macroF1": 0.5508021390374331,
+        "balancedAccuracy": 0.6666666666666667,
+        "auroc": 0.7971380471380471,
+        "confusionMatrix": [
+          [
+            33,
+            33
+          ],
+          [
+            3,
+            15
+          ]
+        ]
+      }
+    }
+  ],
+  "test": {
+    "images": 84,
+    "support": {
+      "healthy": 67,
+      "glaucoma": 17
+    },
+    "threshold": 0.10319450125098228,
+    "accuracy": 0.6904761904761905,
+    "sensitivity": 0.7058823529411765,
+    "specificity": 0.6865671641791045,
+    "precision": 0.36363636363636365,
+    "macroF1": 0.6298305084745763,
+    "balancedAccuracy": 0.6962247585601404,
+    "auroc": 0.7848990342405618,
+    "confusionMatrix": [
+      [
+        46,
+        21
+      ],
+      [
+        5,
+        12
+      ]
+    ]
+  },
+  "patientBootstrap95CI": {
+    "sensitivity": [
+      0.4375,
+      0.9411764705882353
+    ],
+    "specificity": [
+      0.5372863941163747,
+      0.824599542334096
+    ],
+    "auroc": [
+      0.62609304138322,
+      0.9190104166666667
+    ],
+    "accuracy": [
+      0.5711309523809524,
+      0.8214285714285714
+    ]
+  },
+  "engineeringGate": {
+    "passed": false,
+    "requirements": "Held-out sensitivity>=0.80, specificity>=0.70, AUROC>=0.75, >=10 images per reference class. Not a clinical approval."
+  },
+  "clinicalValidation": false,
+  "calibrated": false,
+  "activeModelChanged": false,
+  "limitations": [
+    "Single Spanish cohort; no independent-site validation.",
+    "Small test cohort; estimates have wide uncertainty.",
+    "Patient-separated splits plus exact file/decoded-pixel duplicate grouping; transformed duplicates not comprehensively excluded."
+  ],
+  "splitCounts": {
+    "train": {
+      "patients": 146,
+      "images": 292,
+      "binaryImages": 252
+    },
+    "validation": {
+      "patients": 49,
+      "images": 98,
+      "binaryImages": 84
+    },
+    "test": {
+      "patients": 49,
+      "images": 98,
+      "binaryImages": 84
+    }
+  },
+  "source": {
+    "name": "PAPILA",
+    "doi": "10.6084/m9.figshare.14798004.v2",
+    "license": "GPL-3.0+",
+    "labels": {
+      "0": "healthy",
+      "1": "glaucoma",
+      "2": "suspect (excluded)"
+    },
+    "note": "Trained only on publicly released benchmark images, not app uploads.",
+    "trainedOnAppPatientUploads": false
+  }
+}

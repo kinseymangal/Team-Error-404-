@@ -1,0 +1,34 @@
+{
+  "source": "https://huggingface.co/ClementP/fundus-lesions-segmentation-unet_seresnext50_32x4d",
+  "revision": "a2cfcb594e483d8baa17f24e1152009641cb9847",
+  "license": "MIT",
+  "architecture": "U-Net / SE-ResNeXt50",
+  "channels": [
+    "background",
+    "SE",
+    "EX",
+    "HE",
+    "MA"
+  ],
+  "input": [
+    1,
+    3,
+    1024,
+    1024
+  ],
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "sha256": "6d738a5fd5d4604a7a04dc790c71c75b180df82162e8f69d576b99df62afebf6",
+  "sourceWeightsSha256": "a7a7cb45b92328f7c9a8e581eec3944fd435d37fae8cbf340b1319c5f987c6d2",
+  "clinicalValidation": false
+}

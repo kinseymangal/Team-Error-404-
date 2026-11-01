@@ -1,0 +1,5 @@
+[
+  {"name":"Demo Dr. Asha","email":"demo.retina@netriv.invalid","specialization":"Retina — demonstration profile","registration":"DEMO-RETINA-NOT-A-LICENCE","hospital":"Demo Eye Clinic — fictional","contact":"Test account; no clinical contact"},
+  {"name":"Demo Dr. Rohan","email":"demo.glaucoma@netriv.invalid","specialization":"Glaucoma — demonstration profile","registration":"DEMO-GLAUCOMA-NOT-A-LICENCE","hospital":"Demo Eye Clinic — fictional","contact":"Test account; no clinical contact"},
+  {"name":"Demo Dr. Meera","email":"demo.eye-care@netriv.invalid","specialization":"General eye care — demonstration profile","registration":"DEMO-EYECARE-NOT-A-LICENCE","hospital":"Demo Eye Clinic — fictional","contact":"Test account; no clinical contact"}
+]

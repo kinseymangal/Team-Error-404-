@@ -1,0 +1,1 @@
+IDRiD retinal photographs: Indian Diabetic Retinopathy Image Dataset, Porwal et al., CC BY 4.0. Source mirror pinned in scripts/setup.mjs. IDRiD_07 and IDRiD_55 are research samples, not patient records. fundus.jpg is a downsampled IDRiD_55; blurred.jpg is its blurred derivative. These images are functional test fixtures, not an independent clinical evaluation cohort.

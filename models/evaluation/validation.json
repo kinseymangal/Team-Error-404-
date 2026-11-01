@@ -1,0 +1,498 @@
+{
+  "status": "research-evaluated-not-clinically-validated",
+  "clinicalValidation": false,
+  "calibrated": false,
+  "selection": "Retained existing weights; newly trained grading and segmentation candidates did not improve validation performance.",
+  "grading": {
+    "sha256": "8480ff7a0d598c6fa0ec26fb00dcf4bc5e28ea7e5945e46a81f8bcae2075ce6e",
+    "validation": {
+      "images": 469,
+      "confusionMatrix": [
+        [
+          225,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          38,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          123,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          13,
+          8,
+          5
+        ],
+        [
+          1,
+          2,
+          7,
+          4,
+          25
+        ]
+      ],
+      "axes": "rows: expert grade; columns: predicted grade",
+      "perClass": [
+        {
+          "grade": 0,
+          "support": 228,
+          "predictedCount": 226,
+          "precision": 0.995575221238938,
+          "recall": 0.9868421052631579,
+          "f1": 0.9911894273127753
+        },
+        {
+          "grade": 1,
+          "support": 47,
+          "predictedCount": 46,
+          "precision": 0.8260869565217391,
+          "recall": 0.8085106382978723,
+          "f1": 0.8172043010752688
+        },
+        {
+          "grade": 2,
+          "support": 128,
+          "predictedCount": 152,
+          "precision": 0.8092105263157895,
+          "recall": 0.9609375,
+          "f1": 0.8785714285714287
+        },
+        {
+          "grade": 3,
+          "support": 27,
+          "predictedCount": 13,
+          "precision": 0.6153846153846154,
+          "recall": 0.2962962962962963,
+          "f1": 0.4
+        },
+        {
+          "grade": 4,
+          "support": 39,
+          "predictedCount": 32,
+          "precision": 0.78125,
+          "recall": 0.6410256410256411,
+          "f1": 0.7042253521126761
+        }
+      ],
+      "macroF1": 0.7582381018144297,
+      "accuracy": 0.8933901918976546,
+      "quadraticWeightedKappa": 0.9268999566109349,
+      "missingClasses": [],
+      "warning": null
+    },
+    "test": {
+      "images": 465,
+      "confusionMatrix": [
+        [
+          227,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          6,
+          31,
+          10,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          115,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          11,
+          10,
+          3
+        ],
+        [
+          0,
+          3,
+          14,
+          2,
+          20
+        ]
+      ],
+      "axes": "rows: expert grade; columns: predicted grade",
+      "perClass": [
+        {
+          "grade": 0,
+          "support": 228,
+          "predictedCount": 233,
+          "precision": 0.9742489270386266,
+          "recall": 0.9956140350877193,
+          "f1": 0.9848156182212581
+        },
+        {
+          "grade": 1,
+          "support": 47,
+          "predictedCount": 45,
+          "precision": 0.6888888888888889,
+          "recall": 0.6595744680851063,
+          "f1": 0.6739130434782609
+        },
+        {
+          "grade": 2,
+          "support": 127,
+          "predictedCount": 151,
+          "precision": 0.7615894039735099,
+          "recall": 0.905511811023622,
+          "f1": 0.827338129496403
+        },
+        {
+          "grade": 3,
+          "support": 24,
+          "predictedCount": 13,
+          "precision": 0.7692307692307693,
+          "recall": 0.4166666666666667,
+          "f1": 0.5405405405405406
+        },
+        {
+          "grade": 4,
+          "support": 39,
+          "predictedCount": 23,
+          "precision": 0.8695652173913043,
+          "recall": 0.5128205128205128,
+          "f1": 0.6451612903225806
+        }
+      ],
+      "macroF1": 0.7343537244118086,
+      "accuracy": 0.8666666666666667,
+      "quadraticWeightedKappa": 0.9091174930362949,
+      "missingClasses": [],
+      "warning": null
+    },
+    "limitations": [
+      "Upstream classifier was trained on APTOS; overlap with this local evaluation cannot be excluded. These results are not independent validation.",
+      "CSV lacks patient identifiers; patient-level separation cannot be verified.",
+      "Scores are uncalibrated model outputs, not probabilities that a diagnosis is correct."
+    ]
+  },
+  "segmentation": {
+    "sha256": "6d738a5fd5d4604a7a04dc790c71c75b180df82162e8f69d576b99df62afebf6",
+    "evaluation": {
+      "counts": {
+        "MA": {
+          "tp": 837,
+          "fp": 1598,
+          "fn": 766,
+          "images": 8,
+          "dice": 0.4145616641901932,
+          "precision": 0.3437371663244353,
+          "recall": 0.5221459762944479
+        },
+        "HE": {
+          "tp": 22918,
+          "fp": 8595,
+          "fn": 13570,
+          "images": 8,
+          "dice": 0.6740489110454257,
+          "precision": 0.7272554183987561,
+          "recall": 0.6280969085726814
+        },
+        "EX": {
+          "tp": 14596,
+          "fp": 6554,
+          "fn": 3481,
+          "images": 8,
+          "dice": 0.7441813036938844,
+          "precision": 0.6901182033096926,
+          "recall": 0.8074348619793107
+        },
+        "SE": {
+          "tp": 5165,
+          "fp": 1172,
+          "fn": 2007,
+          "images": 5,
+          "dice": 0.764675401584129,
+          "precision": 0.8150544421650623,
+          "recall": 0.7201617401003904
+        }
+      },
+      "macroDice": 0.6493668201284081,
+      "rows": [
+        {
+          "id": "IDRiD_55",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.46190476190476193,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0.7094789463564699,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.8135179153094463,
+              "suppressed": false
+            },
+            "SE": {
+              "dice": 0,
+              "suppressed": false
+            }
+          }
+        },
+        {
+          "id": "IDRiD_56",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.4479166666666667,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0.5116857972617895,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.6322188449848024,
+              "suppressed": false
+            },
+            "SE": {
+              "dice": 0.6829268292682927,
+              "suppressed": false
+            }
+          }
+        },
+        {
+          "id": "IDRiD_57",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.1958041958041958,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.5058236272878536,
+              "suppressed": false
+            }
+          }
+        },
+        {
+          "id": "IDRiD_58",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.4140786749482402,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0.42842500854116844,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.7205387205387206,
+              "suppressed": false
+            }
+          }
+        },
+        {
+          "id": "IDRiD_59",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.47248322147651006,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0.697072838665759,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.6560033236393851,
+              "suppressed": false
+            },
+            "SE": {
+              "dice": 0.7561709813365443,
+              "suppressed": false
+            }
+          }
+        },
+        {
+          "id": "IDRiD_60",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.35986159169550175,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0.5203619909502263,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.6315381635025185,
+              "suppressed": false
+            },
+            "SE": {
+              "dice": 0.8114224137931034,
+              "suppressed": false
+            }
+          }
+        },
+        {
+          "id": "IDRiD_61",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.43132530120481927,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0.7204076023762711,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.717136958017894,
+              "suppressed": false
+            },
+            "SE": {
+              "dice": 0.9245033112582781,
+              "suppressed": false
+            }
+          }
+        },
+        {
+          "id": "IDRiD_62",
+          "status": "experimental",
+          "categories": {
+            "MA": {
+              "dice": 0.2889733840304182,
+              "suppressed": false
+            },
+            "HE": {
+              "dice": 0.26287744227353466,
+              "suppressed": false
+            },
+            "EX": {
+              "dice": 0.6666666666666666,
+              "suppressed": false
+            }
+          }
+        }
+      ]
+    },
+    "limitations": [
+      "Small eight-image IDRiD evaluation; upstream training overlap cannot be excluded.",
+      "Small lesions may be missed; masks and boxes are suspected regions, not confirmed diagnoses."
+    ]
+  },
+  "training": {
+    "completed": true,
+    "usableImages": 3093,
+    "rejectedFiles": 569,
+    "trainImages": 2159,
+    "validationImages": 469,
+    "testImages": 465,
+    "newGradingCandidateTest": {
+      "images": 465,
+      "accuracy": 0.7741935483870968,
+      "macroF1": 0.5500100351078148,
+      "quadraticWeightedKappa": 0.8421708674457663,
+      "perClass": [
+        {
+          "grade": 0,
+          "support": 228,
+          "predictedCount": 237,
+          "precision": 0.9451476793248945,
+          "recall": 0.9824561403508771,
+          "f1": 0.9634408602150537
+        },
+        {
+          "grade": 1,
+          "support": 47,
+          "predictedCount": 35,
+          "precision": 0.5428571428571428,
+          "recall": 0.40425531914893614,
+          "f1": 0.46341463414634143
+        },
+        {
+          "grade": 2,
+          "support": 127,
+          "predictedCount": 150,
+          "precision": 0.6666666666666666,
+          "recall": 0.7874015748031497,
+          "f1": 0.7220216606498194
+        },
+        {
+          "grade": 3,
+          "support": 24,
+          "predictedCount": 20,
+          "precision": 0.2,
+          "recall": 0.16666666666666666,
+          "f1": 0.1818181818181818
+        },
+        {
+          "grade": 4,
+          "support": 39,
+          "predictedCount": 23,
+          "precision": 0.5652173913043478,
+          "recall": 0.3333333333333333,
+          "f1": 0.4193548387096774
+        }
+      ],
+      "confusionMatrix": [
+        [
+          224,
+          2,
+          2,
+          0,
+          0
+        ],
+        [
+          8,
+          19,
+          19,
+          1,
+          0
+        ],
+        [
+          5,
+          8,
+          100,
+          10,
+          4
+        ],
+        [
+          0,
+          1,
+          13,
+          4,
+          6
+        ],
+        [
+          0,
+          5,
+          16,
+          5,
+          13
+        ]
+      ]
+    },
+    "replacementActivated": false
+  }
+}

@@ -1,0 +1,1 @@
+Copy server and scripts into your extracted NayanSetu-MERN folder, replacing matching files. Stop all previous npm start and npm run dev terminals with Ctrl+C. In the project folder run npm.cmd run dev, then open http://127.0.0.1:5173. The interface and API now share one port.

@@ -1,0 +1,19 @@
+{
+  "source": "Shadow0482/iris-onnx",
+  "revision": "904babc43d877b17335892969abbb910677ffe84",
+  "sha256": "ebb13671c4fe88374ca8c3ed1a14f3adf4a08b2e47f981cd1823c84f01df87e9",
+  "preprocessing": {
+    "size": 224,
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "limitations": "Third-party APTOS research weights. No independent clinical validation performed. Output probabilities are not calibrated confidence."
+}
